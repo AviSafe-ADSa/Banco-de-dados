@@ -216,6 +216,19 @@ dtPagamento DATETIME
 );
 
 
+INSERT INTO Pagamento VALUES
+(DEFAULT, 'pix', '2025-09-20 12:00:00'),
+(DEFAULT, 'credito', '2025-12-02 13:10:00'),
+(DEFAULT, 'transferencia', '2025-07-06 10:20:00'),
+(DEFAULT, 'boleto', '2025-04-10 09:30:00'),
+(DEFAULT, 'pix', '2025-11-15 11:00:00'),
+(DEFAULT, 'boleto', '2025-08-11 15:45:00'),
+(DEFAULT, 'credito', '2025-05-03 16:00:00'),
+(DEFAULT, 'transferencia', '2025-06-02 17:28:00');
+
+SELECT * FROM Pagamento;
+
+
 
 
 
