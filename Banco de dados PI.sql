@@ -67,6 +67,78 @@ SELECT * ,
 SELECT * FROM Usuario 
 where nomeEmpresa like 'C%';
 
+CREATE TABLE Plano (
+idPlano INT PRIMARY KEY AUTO_INCREMENT,
+statusPlano VARCHAR(15),
+CONSTRAINT chkStatusPlano
+	CHECK (statusPlano IN ('pago', 'pendente', 'atrasado')),
+    
+tipoPlano VARCHAR(15),
+CONSTRAINT chkTipoPlano
+	CHECK (tipoPlano IN ('mensal', 'anual')),
+    
+dtAssinatura DATE,
+valorPlano DECIMAL (7,2)
+);
+
+
+
+
+DESC Plano;
+-- inserir dados de planos assinados de 2025
+INSERT Plano VALUES
+	(DEFAULT, 'pago','mensal','2025-10-08',10000.00),
+    (DEFAULT,'pendente','mensal','2025-06-10',1274.00),
+    (DEFAULT,'atrasado','anual','2025-05-10',18000.00),
+    (DEFAULT,'atrasado','mensal','2025-08-27',10000.00),
+    (DEFAULT,'pendente','anual','2025-01-04',14678.00),
+    (DEFAULT,'pago','mensal','2025-12-27',19000.00),
+    (DEFAULT,'pago','mensal','2025-07-18',10000.00),
+    (DEFAULT,'pendente','anual','2025-01-01',2810.00),
+    (DEFAULT,'pago','anual','2025-11-07',2190.00);
+    
+SELECT * FROM Plano;
+
+
+
+-- ver quais não foram pagos
+
+SELECT * FROM Plano
+	WHERE statusPlano IN ('pendente','atrasado');
+    
+    
+-- select para ver a situação dos planos de 2025
+
+SELECT *,
+		CASE
+    WHEN tipoPlano = 'Mensal' AND statusPlano = 'atrasado' THEN 'Plano Mensal Atrasado'
+    WHEN tipoPlano = 'anual' AND statusPlano = 'atrasado' THEN 'Plano Anual Atrasado'
+    WHEN tipoPlano = 'Mensal' AND statusPlano = 'pendente' THEN 'Plano Mensal Pendente'
+	WHEN tipoPlano = 'Anual' AND statusPlano = 'pendente' THEN 'Plano Anual Pendente'
+	WHEN tipoPlano = 'Mensal' AND statusPlano = 'pago' THEN 'Plano Mensal Pago'
+	WHEN tipoPlano = 'Anual' AND statusPlano = 'pago' THEN 'Plano Anual Pago'
+    END AS 'Situação de Pagamento'
+    FROM plano;
+ 
+ 
+-- ver os planos assinados no primeiro semestre    
+
+select * from Plano
+	where dtAssinatura < '2025-06-01';
+
+-- ver os planos assinados no segundo semestre de 2025
+
+select * from Plano
+	where dtAssinatura>= '2025-06-01';
+
+
+        
+SELECT * FROM plano;
+
+
+
+-- -----------------------------------------------------------------
+
 
 
 
